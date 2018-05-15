@@ -1,0 +1,12 @@
+﻿@model IEnumerable<WCAG.Controllers.Comment>
+@{
+    Layout = null;
+}
+
+@foreach (var comment in Model)
+{
+    <div class="row" > @*//TODO: role="status" krävs för att skärmläsare ska identifiera innehållet.*@
+        <span class="col-md-6">@comment.Content</span>
+        <span class="col-md-6 text-muted">@comment.Name</span>
+    </div>
+}

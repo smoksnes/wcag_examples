@@ -1,0 +1,27 @@
+﻿@model IEnumerable<WCAG.Controllers.Comment>
+
+<div class="jumbotron">
+    <h1>Async laddning</h1>
+    <p class="lead">Ett exempel på hur man kan förbättra en sida med javascript, men behålla bakåtkompabiliteten.</p>
+</div>
+
+<div class="items">
+    @Html.Partial("_Comment")
+</div>
+@Html.ActionLink("Hämta fler kommentarer", "Index", new { skip = 0, take = ViewBag.Take + 1 }, new { @class = "get-more" })
+
+@section scripts
+{
+    <script type="text/javascript">
+        var skip = 2;
+        $('.get-more').click(function(e) {
+            e.preventDefault();
+            $.get("/comments/more",
+                { take: 1, skip: skip },
+                function(data) {
+                    skip++;
+                    $(".items").append(data);
+                });
+        });
+    </script>
+}
